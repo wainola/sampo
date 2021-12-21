@@ -1,12 +1,15 @@
 {
-  "name": "TODO",
-  "description": "TODO",
+  "name": "Sampo",
+  "description": "Bridge interface for admin purposes",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
     "export": "sapper export --legacy",
-    "start": "node __sapper__/build"
+    "start": "node __sapper__/build",
+    "dev:local:build": "docker-compose -f docker-compose.yml build",
+    "dev:local:up": "docker-compose -f docker-compose.yml up",
+    "dev:deploy": "docker container create --name temp sampo_relayer1 && docker container cp temp:/bridge ./ && ./bridge local-setup"
   },
   "dependencies": {
     "autoprefixer": "^9.8.8",
