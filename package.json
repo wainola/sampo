@@ -8,7 +8,8 @@
     "export": "sapper export --legacy",
     "start": "node __sapper__/build",
     "dev:local:build": "docker-compose -f docker-compose.yml build",
-    "dev:local:up": "docker-compose -f docker-compose.yml up"
+    "dev:local:up": "docker-compose -f docker-compose.yml up",
+    "dev:deploy": "docker container create --name temp sampo_relayer1 && docker container cp temp:/bridge ./ && ./bridge local-setup"
   },
   "dependencies": {
     "autoprefixer": "^9.8.8",
