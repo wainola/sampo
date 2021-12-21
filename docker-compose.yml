@@ -5,9 +5,9 @@ version: '3'
 services:
   evm1-1:
     build:
-      context: ../geth-build
+      context: ./geth-build
       dockerfile: Dockerfile
-    container_name: evm1-1
+    container_name: EVM1-1
     networks:
       - evm1
     ports:
@@ -22,9 +22,9 @@ services:
   # SECOND CHAIN
   evm2-1:
     build:
-      context: ../geth-build
+      context: ./geth-build
       dockerfile: Dockerfile
-    container_name: evm2-1
+    container_name: EVM2-1
     networks:
       - evm2
     ports:
@@ -37,9 +37,9 @@ services:
     entrypoint: "/root/entrypoint.sh"
 
   relayer1:
-    container_name: relayer1
+    container_name: r1
     build:
-      context: ../../.
+      context: ./.
       dockerfile: Dockerfile
     command: run --config /cfg/config_evm-evm.json --testkey alice --fresh
     depends_on:
@@ -49,12 +49,12 @@ services:
       - evm1
       - evm2
     volumes:
-      - ./example/cfg:/cfg
+      - ./cfg:/cfg
 
   relayer2:
-    container_name: relayer2
+    container_name: r2
     build:
-      context: ../../.
+      context: ./.
       dockerfile: Dockerfile
     command: run --config /cfg/config_evm-evm.json --testkey bob --fresh
     depends_on:
@@ -64,12 +64,12 @@ services:
       - evm1
       - evm2
     volumes:
-      - ./example/cfg:/cfg
+      - ./cfg:/cfg
 
   relayer3:
-    container_name: relayer3
+    container_name: r3
     build:
-      context: ../../.
+      context: ./.
       dockerfile: Dockerfile
     command: run --config /cfg/config_evm-evm.json --testkey charlie --fresh
     depends_on:
@@ -79,7 +79,7 @@ services:
       - evm1
       - evm2
     volumes:
-      - ./example/cfg:/cfg
+      - ./cfg:/cfg
 
 networks:
   evm2:
